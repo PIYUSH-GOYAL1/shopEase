@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Checkout Section</h1>
+    <h3>Order Summary</h3>
+    <% let amount = 0 %>
+    <% user.cart.forEach(function(product){ %>
+        <h1><%= product.product_name %></h1>
+        <h3><%= product.selling_price %></h3>
+        <% amount = amount + product.selling_price %>
+    <% }) %>
+    
+    <h2>Total Amount : <%= amount %></h2>
+    
+    <h2><a href="/user/cart/order">Place Order</a></h2>
+</body>
+</html>

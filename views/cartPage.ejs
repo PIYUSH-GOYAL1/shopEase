@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <% if (error.length > 0){ %>
+        <h3><%= error %></h3>
+    <% } %>
+    <h1>CART</h1>
+    <h1>List Of All products In your cart.</h1>
+    <% if (user.cart.length ==0){ %> 
+        <h3>Your Cart is Empty.</h3>
+    <% } %>
+
+    <% user.cart.reverse().forEach(function(productOne){ %>
+        <img src="data:image/jpeg;base64,<%= productOne.product_image.toString('base64') %>" alt="">
+        <h3><%= productOne.product_name %></h3>
+        <h3>Category : <%= productOne.category %></h3>
+        <h3>MRP : <s><%= productOne.price %></s></h3>
+        <h3>Discount : <%= productOne.discount %>%</h3>
+        <h3>Price : <%= productOne.price - ((productOne.discount*productOne.price)/100) %></h3>
+        <h3>Description : <%= productOne.description %></h3>
+        <h3>Ratings : <%= productOne.rating %></h3>
+        <% if (productOne.review.length != 0){ %>
+            <h3>Reviews : </h3>
+        <% } %>
+        <% if (productOne.order.length > 10){ %>
+            <h4><%= productOne.order.length %> customers find this product useful.</h4>
+        <% } %>
+        <% if (productOne.quantity_available <= 5){ %>
+            <h3>Limited Stocks Left</h3>
+        <% } %>
+        <!-- <a href="/user/plus/<%= productOne._id %>">PLUS</a> 
+        <a href="/user/minus/<%= productOne._id %>">MINUS</a> -->
+        <a href="/user/cart/remove/<%= productOne._id %>">Remove From CART</a> 
+
+    <% }) %>
+    
+    
+    <% if (user.cart.length !=0){ %> 
+        <h2><a href="/user/cart/checkout">Proceed To CheckOut</a></h2>
+    <% } %>
+
+    
+</body>
+</html>

@@ -1,0 +1,1 @@
+# This is a Demo E Commerce App incorportaing the functions of both customers and traders.

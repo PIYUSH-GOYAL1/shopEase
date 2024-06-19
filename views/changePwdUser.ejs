@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <% if (error.length > 0){ %>
+        <h4><%= error %></h4>
+    <% } %>
+    <form action="/user/updatePassword" method="post">
+
+        <label for="oldpassword">Enter Your Old Password : </label>
+        <input type="text" name="oldpassword" id="oldpassword"><br><br>
+
+        <label for="newpassword">Enter Your New Password : </label>
+        <input type="password" name="newpassword" id="newpassword"><br><br>
+
+        <label for="confirmpassword">Confirm Your Password : </label>
+        <input type="text" name="confirmpassword" id="confirmpassword"><br><br>
+
+        <button type="submit">CHANGE PASSWORD</button>
+
+    </form>
+</body>
+</html>

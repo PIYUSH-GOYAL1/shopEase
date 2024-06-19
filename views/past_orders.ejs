@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Successful Orders : </h1>
+    <% if (success_orders.length == 0){ %>
+        <h3>No successful orders yet.</h3>
+    <% }else{ %>
+        <% success_orders.forEach(function(order){ %>
+            <%= order.id %> <br>
+        <% }) %>
+    <% } %>
+    <h2>Cancelled Orders : </h2>
+    <% if (cancelled_orders.length == 0){ %>
+        <h3>No Cancelled orders yet.</h3>
+    <% }else{ %>
+        <% cancelled_orders.forEach(function(order){ %>
+            <%= order.id %> <br>
+        <% }) %>
+    <% } %>
+
+    <h2>Returned Orders : </h2>
+    <% if (returned_orders.length == 0){ %>
+        <h3>No returned orders yet.</h3>
+    <% }else{ %>
+        <% returned_orders.forEach(function(order){ %>
+            <%= order.id %> <br>
+        <% }) %>
+    <% } %>
+</body>
+</html>

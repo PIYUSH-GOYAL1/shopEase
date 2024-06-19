@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <% if (error.length > 0){ %>
+        <h3><%= error %></h3>
+    <% } %>
+
+    <%= order._id %> <br>
+    <h3>Purchased By : </h3><%= user.fullname %> <br>
+    <%= order.order_date %> <br>
+    <% order.product_list.forEach(function(product){ %>
+        <%= product.product_name %> 
+        <%= product.selling_price %> <br>
+        <% }) %>
+    <h4>Total Amount : </h4><%= order.total_amount %> <br>
+        
+    <form action="/owner/manage_order/<%= order._id %>" method="post">
+        <label for="order_status">Update Status : </label>
+        <select id="order_status" name="order_status">
+            <!-- <option value="pending">Pending</option> -->
+            <option value="processing">Processing</option>
+            <option value="dispatched">Dispatched</option>
+            <option value="delivered">Delivered</option>
+        </select><br>
+        <button type="submit">Update</button>
+    </form>
+
+</body>
+</html>

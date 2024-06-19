@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Complaint Section : </h1>
+    <%= order._id %> <br>
+    <%= order.total_amount %> <br>
+    <% order.product_list.forEach(function(product){ %>
+        <%= product.product_name %> <br><br>
+        <!-- <%= product.selling_price %> -->
+        <br><br>
+    <% }) %>
+
+    <form action="/user/order/complaint/<%= order._id %>" method="post">
+        <label for="complaint">Write Down Your query</label>
+        <textarea name="complaint" id="complaint"></textarea>
+        <button type="submit">Submit Complaint</button>
+    </form>
+
+</body>
+</html>

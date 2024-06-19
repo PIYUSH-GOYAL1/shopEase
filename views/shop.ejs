@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <% if (error.length>0) %>
+    <h4> <%= error %></h4>
+    <h1>Welcome to Shop Page</h1>
+    <h2>This page contains all the products listed by the owners</h2>
+    <h3>Also it contains all the activities a customer can perform.</h3>
+    <a href="user/cart">View Cart</a>
+    <img src="data:image/jpeg;base64,<%= user.profilepic.toString('base64') %>" alt="">
+    <h2>Welcome <%= user.fullname %></h2>
+
+    <a href="user/changePassword">Change Password</a>
+    <a href="user/updateProfile">Update Profile</a>
+    <a href="user/order">View Your Orders</a>
+
+    <% if (product.length == 0){ %>
+        <h3>There are no products to Display.</h3>
+    <% } %>
+    
+
+    <% product.forEach(function(productOne){ %>
+        <img src="data:image/jpeg;base64,<%= productOne.product_image.toString('base64') %>" alt="">
+        <h3><%= productOne.product_name %></h3>
+        <h3>Category : <%= productOne.category %></h3>
+        <h3>MRP : <s><%= productOne.price %></s></h3>
+        <h3>Discount : <%= productOne.discount %>%</h3>
+        <h3>Price : <%= productOne.price - ((productOne.discount*productOne.price)/100) %></h3>
+        <h3>Description : <%= productOne.description %></h3>
+        <h3>Ratings : <%= productOne.rating %></h3>
+        <% if (productOne.review.length != 0){ %>
+            <h3>Reviews : </h3>
+            <% productOne.review.forEach(function(review){ %>
+                <%= review.review_statement %> <br>
+            <% }) %>
+        <% } %>
+        <% if (productOne.order.length > 10){ %>
+            <h4><%= productOne.order.length %> customers find this product useful.</h4>
+        <% } %>
+        <% if (productOne.quantity_available <= 5 && productOne.quantity_available > 0){ %>
+            <h3>Limited Stocks Left</h3>
+        <% } %>
+        <% if (productOne.quantity_available == 0){ %>
+            <h3>Out of Stock</h3>
+        <% }else{ %>
+            <a href="user/addToCart/<%= productOne._id %>">
+                <%= user.cart.indexOf(productOne._id) === -1 ? "Add to Cart" : "Added To cart" %>
+            </a>
+        <% } %>
+        <!-- <a href="/owner/manageProduct/<%= productOne._id %>">Update Details</a>
+        <a href="/owner/deleteProduct/<%= productOne._id %>">Delete Product</a> -->
+        <!-- <a href="user/addToCart">Add to Cart</a> -->
+
+    <% }) %>
+
+    <form action="/logout" method="post">
+        <button type="submit">LOGOUT</button>
+    </form>
+</body>
+</html>

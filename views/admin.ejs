@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <% if (error.length > 0) %>
+    <h3><%= error %></h3>
+    
+    <img src="data:image/jpeg;base64,<%= user.profilepic.toString('base64') %>" alt="">
+
+    <h1>Here You can manage various activities.</h1>
+    <h1>Welcome To The Admin Page <%= user.fullname %></h1>
+
+    <a href="/owner/changePwd">Change Password</a><br><br>
+    <a href="/owner/updateProfile">Update Your Profile</a><br><br>
+
+    <% if (!user.isSubOwner){ %>
+        <a href="owner/createSubowner">Create SubOwners</a><br><br>
+        <a href="owner/manageSubOwner">Manage SubOwners</a><br><br>
+    <% } %>
+    
+    <a href="/owner/createProduct">Create Product</a><br><br>
+    <a href="/owner/manageProduct">Manage Product</a><br><br>
+
+    <!-- Display of orders which were in processing or dispatched stage but are cancelled -->
+    <% if (cancelled_orders.length == 0){ %>
+        <h3>No Cancelled Orders are there</h3>
+    <% }else{ %>
+        <h3>Cancelled Orders : <%= cancelled_orders.length %></h3>
+        <% cancelled_orders.forEach(function(order){ %>
+            <h4>Order ID : <%= order._id %></h4>
+            <a href="/owner/retrieve_order/<%= order._id %>">Is Order Retrived ? </a><br><br>
+        <% }) %>
+    <% } %>
+     <!-- Display of products which were delivered but are returned -->
+     <% if (returned_orders.length == 0){ %>
+        <h3>No Returned Orders are there</h3>
+    <% }else{ %>
+        <h3>Returned Orders : <%= returned_orders.length %></h3>
+        <% returned_orders.forEach(function(order){ %>
+            <h4>Order ID : <%= order._id %></h4>
+            <a href="/owner/retrieve_order/<%= order._id %>">Is Order Retrived ? </a><br><br>
+        <% }) %>
+    <% } %>
+    <!-- this route will display all orders having their product in them sold by them till date -->
+    <a href="/owner/past_orders">Check Past Orders</a><br><br> 
+    <!-- this route will allow processing and dispatched orders to update on dashboard-->
+    <h2>Manage Orders : </h2>
+    <% if (managed_orders.length == 0){ %>
+        <h3>There are No products to manage.</h3>
+    <% }else{ %>
+        <h3>Orders to manage : <%= managed_orders.length %></h3>
+        <% managed_orders.forEach(function(order){ %>
+            <h4>Order ID : <%= order._id %></h4>
+            <a href="/owner/manage_order/<%= order._id %>">Manage Order</a><br><br>
+            <!-- <a href="/owner/retrieve_order/<%= order._id %>">Is Order Retrived ? </a><br><br> -->
+        <% }) %>
+    <% } %>
+    <!-- display all complaints resolved by them till date -->
+    <!-- allow them to update status of complaints on dashboard -->
+    <h2>Manage Complaints : </h2>
+    <% if (pending_complaints.length == 0){ %>
+        <h3>There are no complaints to manage.</h3>
+        <% }else{ %>
+            <% pending_complaints.forEach(function(comp){ %>
+                <%= comp._id %> <br><br>
+                <%= comp.complaint_statement %>
+                <h4>Customer Name : </h4><%= comp.user_id.fullname %> <br><br>
+                <h4>Contact Number : <%= comp.user_id.contact %></h4>
+                <a href="/owner/resolve_complaint/<%= comp._id %>">Is Complaint Resolved</a><br><br>
+                <% }) %>
+                <% } %>
+                <a href="/owner/view_complaints">View Past Complaints</a><br><br>
+                
+                
+    
+    <form action="/logout" method="post">
+        <button type="submit">LOGOUT</button>
+    </form>
+
+</body>
+</html>

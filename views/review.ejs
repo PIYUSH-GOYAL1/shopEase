@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Give Your Valuable Review : </h1>
+    <h3>Product Details : </h3>
+    <img src="data:image/jpeg;base64,<%= product.product_image.toString('base64') %>" alt=""> <br>
+    <%= product.product_name %> <br>
+    <%= product.description %> <br>
+    <%= product.category %> <br>
+
+    <form action="/user/order/review/<%= product._id %>" method="post">
+        <label for="review">Write down Below : </label>
+        <textarea name="review" id="review"></textarea><br><br>
+        <button type="submit">Submit Review</button>
+    </form>
+
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <% if(error.length > 0){ %>
+        <h3><%= error %></h3>
+    <% } %>
+    <h1>Here you can view Your Orders : </h1>
+    <!-- CURRENT ORDERS -->
+
+    <% if(current_order.length > 0){ %>
+        <h3>Current Orders : </h3>
+        <% current_order.forEach(function(order){ %>
+            <h4><%= order._id %></h4>
+            <h4><%= order.status %></h4>
+            <h4><%= order.total_amount %></h4>
+            <h4><%= order.order_date %></h4>
+            <h4><%= order.shipping_address %></h4>
+            <% order.product_list.forEach(function(product){ %>
+                <h5><%= product.product_name %></h5>
+                <h5><%= product.selling_price %></h5>
+
+            <% }) %>
+            <a href="/user/order/cancel/<%= order._id %>">CANCEL ORDER </a>
+        <% }) %>
+    <% }else{ %>
+        <h3>No Current Orders are there.</h3>
+    <% } %>
+
+    <!-- PAST ORDERS -->
+
+    <% if(past_order.length > 0){ %>
+        <h3>Past Orders : </h3>
+        <% past_order.reverse().forEach(function(order){ %>
+            <h4><%= order._id %></h4>
+            <% if (order.is_cancelled){ %>
+                <h4>Status : Cancelled</h4>
+                <% }else if (order.is_returned){ %>
+                <h4>Status : Returned</h4>
+                    
+                    <% }else{ %>
+                        
+                        <h4><%= order.status %></h4>
+                    <% } %>
+            <h4><%= order.total_amount %></h4>
+            <h4><%= order.order_date %></h4>
+            <h4><%= order.shipping_address %></h4>
+            <% order.product_list.forEach(function(product){ %>
+                <h5><%= product.product_name %></h5>
+                <h5><%= product.selling_price %></h5>
+                
+
+                <% if (!order.is_cancelled){ %>
+                    <a href="/user/order/review/<%= product._id %>">
+                    Submit the Review
+
+                    </a>
+                <% } %>
+            <% }) %>
+            <% if (!order.is_cancelled){ %>
+            <a href="/user/order/complaint/<%= order._id %>">Submit A Complaint</a><br>
+            <% } %>
+            <% if (!order.is_cancelled){ %>
+                <a href="/user/order/<%= order._id %>">
+
+                    <%= order.is_returned === true ? "Order is Returned" : "Return Order" %>
+                </a><br>
+                <% } %>
+        <% }) %>
+    <% } %>
+
+    
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Here is The list of all products on Dashboard</h1>
+
+    <% if (error.length > 0){ %>
+        <h4><%= error %></h4>
+    <% } %>
+    
+    <% if (product.length == 0){ %>
+        <h3>There are no products on dashboard.</h3>
+    <% } %>
+    
+    <% product.forEach(function(productOne){ %>
+        <img src="data:image/jpeg;base64,<%= productOne.product_image.toString('base64') %>" alt="">
+        <h3><%= productOne.product_name %></h3>
+        <h3><%= productOne.category %></h3>
+        <h3><%= productOne.price %></h3>
+        <h3><%= productOne.discount %></h3>
+        <h3><%= productOne.description %></h3>
+        <a href="/owner/manageProduct/<%= productOne._id %>">Update Details</a>
+        <a href="/owner/deleteProduct/<%= productOne._id %>">Delete Product</a>
+
+    <% }) %>
+</body>
+</html>

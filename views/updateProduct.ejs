@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Here you can Modify the details of the Product</h1>
+    <h3>Original Details : </h3>
+    <img src="data:image/jpeg;base64,<%= product.product_image.toString('base64') %>" alt="">
+    <h3><%= product.product_name %></h3>
+    <h3><%= product.category %></h3>
+    <h3><%= product.price %></h3>
+    <h3><%= product.discount %></h3>
+    <h3><%= product.description %></h3>
+
+    <form action="/owner/manageProduct/update" method="post" enctype="multipart/form-data">
+        <label for="product_name">Enter The Name Of Product : </label>
+        <input type="text" name="product_name" id="product_name"><br><br>
+
+        <label for="category">Select The Category of Product : </label>
+        <select name="category" id="category">
+            <option value="apprels">Apprels</option>
+            <option value="footwear">Foot Wear</option>
+            <option value="watches">Watches</option>
+            <option value="beauty">Beauty</option>
+            <option value="sports">Sports</option>
+            <option value="household">Household</option>
+            <option value="childrencare">Children Care</option>
+            <option value="book">Books</option>
+            <option value="travel">Travel</option>
+            <option value="others">Others</option>
+        </select><br><br>
+        <!-- <input type="text" name="product_name" id="product_name"><br><br> -->
+
+        <label for="price">Enter The Price Of Product (MRP) : </label>
+        <input type="number" name="price" id="price" min="0"><br><br>
+
+        <label for="discount">Enter The Discount (percentage) : </label>
+        <input type="number" name="discount" id="discount" min="0" max="100"><br><br>
+
+        <label for="quantity_available">Enter The Stock Amount : </label>
+        <input type="number" name="quantity_available" id="quantity_available" min="0"><br><br>
+
+        <label for="description">Write the Description about Product : </label>
+        <textarea name="description" id="description" maxlength="300"></textarea><br><br>
+
+        <label for="product_image">Upload The Image Of Product : </label>
+        <input type="file" name="product_image" id="product_image"><br><br>
+
+        <input type="hidden" name="id" value="<%= product._id %>">
+
+        <button type="submit">UPDATE</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <% if(error.length > 0){ %>
+        <h3><%= error %></h3>
+    <% }%>
+    
+    <h1>Here is the List of all employees which work in your company.</h1>
+    <% if (user.length == 0){ %>
+        <h4>There are no employees in your Company.</h4>
+    <% } %>
+     <% user.forEach(function(userone){ %>
+        <h2><%= userone.fullname %></h2>
+        <h4><%= userone.email %></h4>
+        <h4><%= userone.contact %></h4>
+        <a href="/owner/manageSubOwner/delete/<%= userone._id %>">DELETE</a>
+     <% }) %>
+</body>
+</html>

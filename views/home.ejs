@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <% if (error.length>0) %>
+    <% error.forEach(function(err){ %>
+        <h4><%= err %></h4>
+    <% })%>
+    
+
+    <h1>This Page contains Information regarding our Company</h1>
+    <h2>Copyright and other details also</h2>
+    <h4>This page contains Register and Login facility for users and owners</h4>
+
+    <h1>LOGIN</h1>
+    <form action="/login" method="post">
+        <label for="email">Enter Your Email ID : </label>
+        <input type="text" id="email" name="email"><br><br>
+
+        <label for="password">Enter Your Password : </label>
+        <input type="password" id="password" name="password"><br><br>
+
+        <button type="submit">LOGIN</button>
+    </form>
+
+    <h1>Register</h1>
+    <form action="/user/register" method="post">
+        <label for="fullname">Enter Your Full Name : </label>
+        <input type="text" id="fullname" name="fullname"><br><br>
+
+        <label for="email">Enter Your Email ID : </label>
+        <input type="text" id="email" name="email"><br><br>
+
+        <label for="contact">Enter Your Contact Details : </label>
+        <input type="number" id="contact" name="contact"><br><br>
+
+        <label for="password">Enter Your Password : </label>
+        <input type="password" id="password" name="password"><br><br>
+
+        <button type="submit">REGISTER</button>
+    </form>
+</body>
+</html>
